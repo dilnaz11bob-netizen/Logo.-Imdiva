@@ -6,13 +6,14 @@
   <title>Imdiva — Сшито с любовью</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   
   <style>
     :root {
       --navy-brand: #0c2142;      /* Темно-синий цвет узора и нижнего блока */
-      --red-accent: #b8292f;      /* Акцентный красный из логотипа */
-      --bg-light: #ffffff;        /* Светлый фон верхней части */
+      --neon-blue: #00d2ff;       /* Яркий голубой неон */
+      --neon-pink: #ff2a5f;       /* Неоновый малиново-красный акцент */
+      --bg-light: #ffffff;
       --text-dark: #1a2436;
       --text-light: #f4f6f9;
     }
@@ -34,7 +35,7 @@
       overflow-x: hidden;
     }
 
-    /* ================= ЕДИНЫЙ ПОТОК (ВЕРХНЯЯ ЧАСТЬ) ================= */
+    /* ================= ВЕРХНЯЯ ЧАСТЬ (ЕДИНЫЙ СЛАЙД) ================= */
     .hero-section {
       min-height: 92vh;
       display: flex;
@@ -46,41 +47,37 @@
       position: relative;
     }
 
-    /* Контейнер логотипа */
     .logo-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
       max-width: 340px;
       width: 100%;
-      margin-bottom: 45px;
+      margin-bottom: 42px;
     }
 
-    /* 1. Основное лого (медленное появление из пустоты) */
+    /* 1. Быстрое появление основного логотипа (0.6 сек) */
     .logo-main {
       width: 100%;
       max-width: 300px;
       height: auto;
       opacity: 0;
-      transform: scale(0.95);
-      filter: blur(4px);
-      animation: fadeInLogo 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      transform: scale(0.94);
+      animation: fastFadeInLogo 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    @keyframes fadeInLogo {
+    @keyframes fastFadeInLogo {
       0% {
         opacity: 0;
-        transform: scale(0.95);
-        filter: blur(4px);
+        transform: scale(0.94);
       }
       100% {
         opacity: 1;
         transform: scale(1);
-        filter: blur(0);
       }
     }
 
-    /* 2. Надпись "сшито с любовью" (вышивка справа налево ПОСЛЕ лого) */
+    /* 2. Быстрая вышивка "сшито с любовью" (новая картинка) справа налево */
     .logo-tagline-box {
       width: 100%;
       max-width: 280px;
@@ -92,13 +89,12 @@
       width: 100%;
       height: auto;
       display: block;
-      /* Прячем изображение слева, оставляя закрытым */
       clip-path: inset(0 0 0 100%);
-      /* Запускается через 2.0 секунды (сразу после лого) и длится 1.8 сек */
-      animation: embroiderRightToLeft 1.8s cubic-bezier(0.37, 0, 0.63, 1) 2.0s forwards;
+      /* Запускается через 0.45 сек и длится всего 0.6 сек */
+      animation: fastEmbroider 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.45s forwards;
     }
 
-    @keyframes embroiderRightToLeft {
+    @keyframes fastEmbroider {
       0% {
         clip-path: inset(0 0 0 100%);
       }
@@ -107,27 +103,27 @@
       }
     }
 
-    /* ================= КНОПКИ СО СВЕРКАНИЕМ ================= */
+    /* ================= НЕОНОВЫЕ КНОПКИ ================= */
     .buttons-container {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
       width: 100%;
       max-width: 270px;
       opacity: 0;
-      transform: translateY(15px);
-      /* Кнопки появляются мягко вслед за вышивкой */
-      animation: fadeUpButtons 1s ease 3.2s forwards;
+      transform: translateY(10px);
+      /* Быстрое появление кнопок через 0.9 сек */
+      animation: fastFadeButtons 0.45s ease 0.9s forwards;
     }
 
-    @keyframes fadeUpButtons {
+    @keyframes fastFadeButtons {
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    .sparkle-btn {
+    .neon-btn {
       position: relative;
       display: flex;
       align-items: center;
@@ -135,88 +131,89 @@
       padding: 15px 28px;
       font-family: 'Montserrat', sans-serif;
       font-size: 15px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
       color: var(--navy-brand);
       background: #ffffff;
-      border: 1.5px solid rgba(12, 33, 66, 0.28);
-      border-radius: 10px;
+      border: 2px solid var(--neon-blue);
+      border-radius: 12px;
       cursor: pointer;
-      overflow: hidden;
       text-decoration: none;
-      box-shadow: 0 4px 15px rgba(12, 33, 66, 0.06);
-      transition: transform 0.15s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      box-shadow: 
+        0 0 10px rgba(0, 210, 255, 0.55),
+        0 0 22px rgba(0, 210, 255, 0.3),
+        inset 0 0 8px rgba(0, 210, 255, 0.25);
+      animation: neonPulseBlue 1.8s infinite alternate ease-in-out;
+      transition: transform 0.12s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Эффект наведения */
-    .sparkle-btn:hover {
-      border-color: var(--navy-brand);
-      box-shadow: 0 6px 22px rgba(12, 33, 66, 0.14);
+    .neon-btn.neon-ruby {
+      border-color: var(--neon-pink);
+      box-shadow: 
+        0 0 10px rgba(255, 42, 95, 0.5),
+        0 0 22px rgba(255, 42, 95, 0.28),
+        inset 0 0 8px rgba(255, 42, 95, 0.2);
+      animation: neonPulseRuby 1.8s infinite alternate ease-in-out;
+    }
+
+    @keyframes neonPulseBlue {
+      0% {
+        box-shadow: 
+          0 0 8px rgba(0, 210, 255, 0.45),
+          0 0 18px rgba(0, 210, 255, 0.25),
+          inset 0 0 6px rgba(0, 210, 255, 0.2);
+      }
+      100% {
+        box-shadow: 
+          0 0 14px rgba(0, 210, 255, 0.9),
+          0 0 30px rgba(0, 210, 255, 0.55),
+          inset 0 0 12px rgba(0, 210, 255, 0.4);
+      }
+    }
+
+    @keyframes neonPulseRuby {
+      0% {
+        box-shadow: 
+          0 0 8px rgba(255, 42, 95, 0.4),
+          0 0 18px rgba(255, 42, 95, 0.22),
+          inset 0 0 6px rgba(255, 42, 95, 0.18);
+      }
+      100% {
+        box-shadow: 
+          0 0 14px rgba(255, 42, 95, 0.85),
+          0 0 30px rgba(255, 42, 95, 0.5),
+          inset 0 0 12px rgba(255, 42, 95, 0.35);
+      }
+    }
+
+    .neon-btn:hover {
+      background: var(--neon-blue);
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
       transform: translateY(-2px);
     }
 
-    /* Эффект реального нажатия кнопки */
-    .sparkle-btn:active {
-      transform: scale(0.96) translateY(1px);
-      box-shadow: 0 2px 8px rgba(12, 33, 66, 0.12);
+    .neon-btn.neon-ruby:hover {
+      background: var(--neon-pink);
+      color: #ffffff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
     }
 
-    /* Манящее сверкание (световой блик) */
-    .sparkle-btn::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -75%;
-      width: 50%;
-      height: 200%;
-      background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 248, 220, 0.85) 50%,
-        rgba(255, 255, 255, 0) 100%
-      );
-      transform: rotate(25deg);
-      animation: shimmerSweep 3.8s infinite ease-in-out;
-      pointer-events: none;
+    .neon-btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 35px rgba(0, 210, 255, 1);
     }
 
-    /* Задержка блика на второй кнопке для красивого перелива */
-    .sparkle-btn:nth-child(2)::before {
-      animation-delay: 1.9s;
-    }
-
-    /* Мягкое внешнее свечение (пульсация) */
-    .sparkle-btn::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 10px;
-      box-shadow: inset 0 0 12px rgba(212, 175, 55, 0.22);
-      opacity: 0;
-      animation: softGlow 3.8s infinite ease-in-out;
-      pointer-events: none;
-    }
-
-    @keyframes shimmerSweep {
-      0% {
-        left: -75%;
-      }
-      35%, 100% {
-        left: 135%;
-      }
-    }
-
-    @keyframes softGlow {
-      0%, 100% { opacity: 0.1; }
-      50% { opacity: 0.9; }
+    .neon-btn.neon-ruby:active {
+      box-shadow: 0 0 35px rgba(255, 42, 95, 1);
     }
 
     /* ================= ПРОДОЛЖЕНИЕ СЛАЙДА (ТЕМНО-СИНИЙ БЛОК) ================= */
     .brand-info-section {
       background-color: var(--navy-brand);
       color: var(--text-light);
-      padding: 65px 24px 80px;
+      padding: 60px 24px 80px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -224,11 +221,11 @@
       position: relative;
     }
 
-    /* Декоративная тонкая линия-разделитель */
-    .divider-ornament {
-      width: 60px;
+    .divider-neon {
+      width: 70px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+      background: var(--neon-blue);
+      box-shadow: 0 0 12px var(--neon-blue), 0 0 20px var(--neon-blue);
       margin-bottom: 24px;
     }
 
@@ -245,12 +242,10 @@
       max-width: 520px;
       font-size: 14.5px;
       line-height: 1.75;
-      font-weight: 300;
       color: rgba(255, 255, 255, 0.88);
       margin-bottom: 40px;
     }
 
-    /* Карточки контактов и адресов */
     .contacts-grid {
       display: flex;
       flex-direction: column;
@@ -260,20 +255,21 @@
     }
 
     .info-card {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(0, 210, 255, 0.35);
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.12);
       border-radius: 12px;
       padding: 18px 20px;
-      backdrop-filter: blur(4px);
     }
 
     .info-label {
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 1.8px;
-      color: #d4af37;
+      color: var(--neon-blue);
+      text-shadow: 0 0 8px rgba(0, 210, 255, 0.6);
       margin-bottom: 6px;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .info-value {
@@ -287,32 +283,35 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin-top: 8px;
+      margin-top: 10px;
       padding: 12px 26px;
       border-radius: 30px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: transparent;
+      border: 1.5px solid var(--neon-blue);
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.45);
       color: #ffffff;
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
-      transition: background 0.25s ease, transform 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     .inst-link:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateY(-2px);
+      background: var(--neon-blue);
+      color: var(--navy-brand);
+      box-shadow: 0 0 22px rgba(0, 210, 255, 0.9);
+      font-weight: 600;
     }
 
     .inst-link:active {
-      transform: scale(0.96);
+      transform: scale(0.95);
     }
 
-    /* ================= ВСПЛЫВАЮЩЕЕ ОКНО ПРИ НАЖАТИИ КНОПКИ ================= */
+    /* ================= МОДАЛЬНОЕ ОКНО ================= */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(12, 33, 66, 0.65);
+      background: rgba(12, 33, 66, 0.7);
       backdrop-filter: blur(3px);
       display: flex;
       justify-content: center;
@@ -320,7 +319,7 @@
       padding: 20px;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       z-index: 100;
     }
 
@@ -337,9 +336,10 @@
       border-radius: 16px;
       padding: 28px 24px;
       text-align: center;
-      transform: scale(0.9);
-      transition: transform 0.3s ease;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      border: 1.5px solid var(--neon-blue);
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
+      transform: scale(0.92);
+      transition: transform 0.2s ease;
     }
 
     .modal-overlay.active .modal-box {
@@ -371,6 +371,7 @@
       font-size: 14px;
       font-weight: 500;
       margin-bottom: 10px;
+      box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
     }
 
     .modal-close {
@@ -385,32 +386,32 @@
 </head>
 <body>
 
-  <!-- ВЕРХНЯЯ ЧАСТЬ: ЛОГОТИП + ВЫШИВКА + КНОПКИ -->
+  <!-- ВЕРХНЯЯ ЧАСТЬ -->
   <section class="hero-section">
     <div class="logo-wrapper">
-      <!-- Основной логотип Imdiva -->
+      <!-- Основное лого -->
       <img src="IMG_20261115_233734.png" alt="Imdiva логотип" class="logo-main">
       
-      <!-- Надпись "сшито с любовью" с анимацией справа налево -->
+      <!-- Новая картинка "сшито с любовью" с анимацией справа налево -->
       <div class="logo-tagline-box">
-        <img src="IMG_20261115_233820.png" alt="сшито с любовью" class="logo-tagline">
+        <img src="IMG-20261116-WA7872.jpg" alt="сшито с любовью" class="logo-tagline">
       </div>
     </div>
 
-    <!-- Кнопки заказа -->
+    <!-- Кнопки -->
     <div class="buttons-container">
-      <button class="sparkle-btn" onclick="openOrderModal('Тапсырыс беру')">
+      <button class="neon-btn" onclick="openOrderModal('Тапсырыс беру')">
         Тапсырыс беру
       </button>
-      <button class="sparkle-btn" onclick="openOrderModal('Оформить заказ')">
+      <button class="neon-btn neon-ruby" onclick="openOrderModal('Оформить заказ')">
         Оформить заказ
       </button>
     </div>
   </section>
 
-  <!-- ПРОДОЛЖЕНИЕ СЛАЙДА (ТЕМНО-СИНИЙ БЛОК): О БРЕНДЕ, АДРЕСА, ИНСТАГРАМ -->
+  <!-- НИЖНИЙ БЛОК (СИНЙ СЛАЙД С ИНФОРМАЦИЕЙ) -->
   <section class="brand-info-section">
-    <div class="divider-ornament"></div>
+    <div class="divider-neon"></div>
     <h2 class="brand-title">О бренде Imdiva</h2>
     <p class="brand-description">
       Каждое изделие создается с особым трепетом, сочетая национальные традиции и современную элегантность. Мы уделяем внимание каждому стежку, чтобы дарить вам комфорт и неповторимый стиль.
@@ -428,7 +429,6 @@
       <div class="info-card">
         <div class="info-label">Мы в социальных сетях</div>
         <div class="info-value">Следите за новыми коллекциями</div>
-        <!-- Замените ссылку на ваш реальный аккаунт Instagram -->
         <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="inst-link">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -441,14 +441,13 @@
     </div>
   </section>
 
-  <!-- МОДАЛЬНОЕ ОКНО ДЛЯ КНОПОК -->
+  <!-- МОДАЛЬНОЕ ОКНО -->
   <div class="modal-overlay" id="orderModal" onclick="closeModalOnBg(event)">
     <div class="modal-box">
       <h3 class="modal-title" id="modalTitle">Оформить заказ</h3>
       <p class="modal-text">
         Перейдите в наш WhatsApp или Instagram Direct, чтобы выбрать размер и оформить доставку.
       </p>
-      <!-- Укажите свой номер WhatsApp вместо 77000000000 -->
       <a href="https://wa.me/77000000000" target="_blank" class="modal-action-btn">
         Написать в WhatsApp
       </a>
@@ -478,4 +477,3 @@
 
 </body>
 </html>
-
