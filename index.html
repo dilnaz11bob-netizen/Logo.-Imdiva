@@ -10,7 +10,7 @@
   
   <style>
     :root {
-      --navy-brand: #0c2142;      /* Темно-синий цвет нижнего блока и узора */
+      --navy-brand: #0c2142;
       --bg-light: #ffffff;
       --text-dark: #2c2c2c;
       --text-light: #f4f6f9;
@@ -54,20 +54,20 @@
       margin-bottom: 45px;
     }
 
-    /* 1. Быстрое появление логотипа */
+    /* 1. Плавное, но собранное появление логотипа (1.1 сек) */
     .logo-main {
       width: 100%;
       max-width: 300px;
       height: auto;
       opacity: 0;
-      transform: scale(0.95);
-      animation: fastFadeInLogo 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transform: scale(0.96);
+      animation: smoothFadeInLogo 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    @keyframes fastFadeInLogo {
+    @keyframes smoothFadeInLogo {
       0% {
         opacity: 0;
-        transform: scale(0.95);
+        transform: scale(0.96);
       }
       100% {
         opacity: 1;
@@ -75,7 +75,7 @@
       }
     }
 
-    /* 2. Быстрая вышивка "сшито с любовью" справа налево */
+    /* 2. Плавное появление "сшито с любовью" сбоку (справа налево, 1.1 сек) */
     .logo-tagline-box {
       width: 100%;
       max-width: 280px;
@@ -88,10 +88,11 @@
       height: auto;
       display: block;
       clip-path: inset(0 0 0 100%);
-      animation: fastEmbroider 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.45s forwards;
+      /* Начинается через 0.85 сек, когда логотип уже проявился */
+      animation: smoothEmbroider 1.1s cubic-bezier(0.25, 1, 0.5, 1) 0.85s forwards;
     }
 
-    @keyframes fastEmbroider {
+    @keyframes smoothEmbroider {
       0% {
         clip-path: inset(0 0 0 100%);
       }
@@ -100,7 +101,7 @@
       }
     }
 
-    /* ================= КНОПКИ БЕЗ СВЕЧЕНИЯ ================= */
+    /* ================= ЧИСТЫЕ КНОПКИ ================= */
     .buttons-container {
       display: flex;
       flex-direction: column;
@@ -109,10 +110,10 @@
       max-width: 250px;
       opacity: 0;
       transform: translateY(10px);
-      animation: fastFadeButtons 0.45s ease 0.9s forwards;
+      animation: smoothFadeButtons 0.65s ease 1.6s forwards;
     }
 
-    @keyframes fastFadeButtons {
+    @keyframes smoothFadeButtons {
       to {
         opacity: 1;
         transform: translateY(0);
@@ -317,10 +318,10 @@
   <!-- ВЕРХНЯЯ ЧАСТЬ -->
   <section class="hero-section">
     <div class="logo-wrapper">
-      <!-- Новое лого -->
+      <!-- Логотип -->
       <img src="Untitled3_20261116115730.png" alt="Imdiva логотип" class="logo-main">
       
-      <!-- Новая надпись "сшито с любовью" -->
+      <!-- Надпись "сшито с любовью" -->
       <div class="logo-tagline-box">
         <img src="Untitled3_20261116115303.png" alt="сшито с любовью" class="logo-tagline">
       </div>
