@@ -47,27 +47,27 @@
 
     .logo-wrapper {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
       max-width: 340px;
       width: 100%;
       margin-bottom: 45px;
     }
 
-    /* 1. Верхняя часть (Imdiva + орнамент) */
-    .logo-main {
+    /* Цельный логотип: плавное и мягкое появление (1.3 сек) */
+    .logo-full {
       width: 100%;
-      max-width: 300px;
+      max-width: 310px;
       height: auto;
       opacity: 0;
-      transform: translateY(8px) scale(0.97);
-      animation: silkyLogoAppear 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      transform: translateY(6px) scale(0.97);
+      animation: silkyFadeLogo 1.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    @keyframes silkyLogoAppear {
+    @keyframes silkyFadeLogo {
       0% {
         opacity: 0;
-        transform: translateY(8px) scale(0.97);
+        transform: translateY(6px) scale(0.97);
       }
       100% {
         opacity: 1;
@@ -75,47 +75,7 @@
       }
     }
 
-    /* 2. Нижняя часть ("сшито с любовью") — плавное появление сбоку (справа налево) */
-    .logo-tagline-box {
-      width: 100%;
-      max-width: 280px;
-      margin-top: 6px;
-      overflow: hidden;
-    }
-
-    .logo-tagline {
-      width: 100%;
-      height: auto;
-      display: block;
-      opacity: 0;
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 100%);
-      mask-image: linear-gradient(to right, transparent 0%, black 20%, black 100%);
-      -webkit-mask-size: 250% 100%;
-      mask-size: 250% 100%;
-      -webkit-mask-position: 0% 0%;
-      mask-position: 0% 0%;
-      animation: silkySideReveal 1.8s cubic-bezier(0.25, 1, 0.4, 1) 1.45s forwards;
-    }
-
-    @keyframes silkySideReveal {
-      0% {
-        opacity: 0;
-        -webkit-mask-position: 0% 0%;
-        mask-position: 0% 0%;
-        transform: translateX(10px);
-      }
-      15% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 1;
-        -webkit-mask-position: 100% 0%;
-        mask-position: 100% 0%;
-        transform: translateX(0);
-      }
-    }
-
-    /* ================= КНОПКИ ================= */
+    /* ================= ПЛАВНЫЕ КНОПКИ ================= */
     .buttons-container {
       display: flex;
       flex-direction: column;
@@ -124,11 +84,16 @@
       max-width: 250px;
       opacity: 0;
       transform: translateY(10px);
-      animation: silkyButtonsAppear 1.1s cubic-bezier(0.22, 1, 0.36, 1) 2.5s forwards;
+      /* Кнопки плавно появляются на 1.0 секунде */
+      animation: silkyFadeButtons 1.2s cubic-bezier(0.22, 1, 0.36, 1) 1.0s forwards;
     }
 
-    @keyframes silkyButtonsAppear {
-      to {
+    @keyframes silkyFadeButtons {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
         opacity: 1;
         transform: translateY(0);
       }
@@ -162,7 +127,7 @@
       background-color: #f1f3f5;
     }
 
-    /* ================= НИЖНИЙ БЛОК (ТЕМНО-СИНЕЕ ПРОДОЛЖЕНИЕ) ================= */
+    /* ================= НИЖНИЙ БЛОК (ТЕМНО-СИНИЙ СЛАЙД С ИНФОРМАЦИЕЙ) ================= */
     .brand-info-section {
       background-color: var(--navy-brand);
       color: var(--text-light);
@@ -332,16 +297,11 @@
   <!-- ВЕРХНЯЯ ЧАСТЬ -->
   <section class="hero-section">
     <div class="logo-wrapper">
-      <!-- Imdiva -->
-      <img src="Untitled3_20261116115730.png" alt="Imdiva" class="logo-main">
-      
-      <!-- сшито с любовью -->
-      <div class="logo-tagline-box">
-        <img src="Untitled3_20261116115303.png" alt="сшито с любовью" class="logo-tagline">
-      </div>
+      <!-- Цельный логотип -->
+      <img src="37918-removebg-preview.png" alt="Imdiva" class="logo-full">
     </div>
 
-    <!-- Кнопки -->
+    <!-- Кнопки с плавным появлением -->
     <div class="buttons-container">
       <button class="clean-btn" onclick="openOrderModal('Тапсырыс беру')">
         Тапсырыс беру
