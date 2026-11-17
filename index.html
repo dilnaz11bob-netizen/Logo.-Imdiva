@@ -1,97 +1,425 @@
-<section class="about-brand-section">
-  <div class="divider-line"></div>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imdiva — Сшито с любовью</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   
-  <!-- Заголовок с картинкой-логотипом вместо текста -->
-  <h2 class="brand-heading">
-    О бренде 
-    <img src="ССЫЛКА_НА_ФОТО_ЛОГОТИПА.png" alt="Imdiva" class="inline-brand-logo">
-  </h2>
+  <style>
+    :root {
+      --navy-brand: #0c2142;
+      --bg-light: #ffffff;
+      --text-dark: #2c2c2c;
+      --text-light: #f4f6f9;
+    }
 
-  <p class="brand-description">
-    Каждое изделие создается с особым трепетом, сочетая национальные традиции и современную элегантность. Мы уделяем внимание каждому стежку, чтобы дарить вам комфорт и неповторимый стиль.
-  </p>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  <!-- Только кнопка Instagram без лишних блоков и текста -->
-  <div class="social-wrapper">
-    <a href="https://instagram.com/imdiva.kz" target="_blank" class="insta-btn">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-      </svg>
-      <span>@imdiva.kz</span>
-    </a>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ================= ВЕРХНЯЯ ЧАСТЬ ================= */
+    .hero-section {
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px 60px;
+      background-color: var(--bg-light);
+      position: relative;
+    }
+
+    .logo-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      max-width: 380px;
+      width: 100%;
+      margin-bottom: 35px;
+    }
+
+    /* 1. Плавное появление основного логотипа */
+    .logo-full {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      opacity: 0;
+      transform: translateY(6px) scale(0.97);
+      animation: silkyFadeLogo 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes silkyFadeLogo {
+      0% {
+        opacity: 0;
+        transform: translateY(6px) scale(0.97);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* 2. Вышивка "сшито с любовью" с иголкой снизу логотипа */
+    .embroidery {
+      text-align: center;
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      margin: -6px auto 0;
+      opacity: 0;
+      animation: showEmbroideryBox 0.3s ease 0.9s forwards;
+    }
+
+    @keyframes showEmbroideryBox {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .embroidery svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .stitch-text {
+      font-size: 36px;
+      font-family: 'Cormorant Garamond', cursive;
+      font-style: italic;
+      fill: none;
+      stroke: #c1272d;
+      stroke-width: 1.5;
+      stroke-dasharray: 5 4;
+      stroke-dashoffset: 900;
+      animation: stitch 3s forwards ease-in-out 0.95s;
+    }
+
+    @keyframes stitch {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .needle {
+      font-size: 24px;
+      position: absolute;
+      top: 12px;
+      left: 4%;
+      opacity: 0;
+      animation: needleMove 3s forwards ease-in-out 0.95s;
+      pointer-events: none;
+    }
+
+    @keyframes needleMove {
+      0% {
+        left: 4%;
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+      }
+      20% {
+        transform: translateY(-4px) rotate(-8deg);
+      }
+      40% {
+        transform: translateY(2px) rotate(5deg);
+      }
+      60% {
+        transform: translateY(-4px) rotate(-8deg);
+      }
+      80% {
+        transform: translateY(2px) rotate(5deg);
+      }
+      92% {
+        opacity: 1;
+      }
+      100% {
+        left: 88%;
+        opacity: 0;
+        transform: translateY(-6px) rotate(-10deg);
+      }
+    }
+
+    /* ================= ПЛАВНЫЕ КНОПКИ ================= */
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+      max-width: 250px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: silkyFadeButtons 1.0s cubic-bezier(0.22, 1, 0.36, 1) 3.4s forwards;
+    }
+
+    @keyframes silkyFadeButtons {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .clean-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 24px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14.5px;
+      font-weight: 400;
+      color: #2b2b2b;
+      background-color: #ffffff;
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .clean-btn:hover {
+      background-color: #f8f9fa;
+      border-color: #999999;
+    }
+
+    .clean-btn:active {
+      transform: scale(0.97);
+      background-color: #f1f3f5;
+    }
+
+    /* ================= НИЖНИЙ БЛОК (ТЕМНО-СИНИЙ СЛАЙД) ================= */
+    .brand-info-section {
+      background-color: var(--navy-brand);
+      color: var(--text-light);
+      padding: 60px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .divider-line {
+      width: 50px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.3);
+      margin-bottom: 24px;
+    }
+
+    .bottom-logo-box {
+      background-color: #ffffff;
+      padding: 14px 24px;
+      border-radius: 14px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .bottom-logo {
+      width: 100%;
+      max-width: 190px;
+      height: auto;
+      display: block;
+    }
+
+    .brand-description {
+      max-width: 520px;
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.88);
+      margin-bottom: 40px;
+    }
+
+    .contacts-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      min-height: 115px;
+      padding: 20px;
+    }
+
+    /* ================= МОДАЛЬНОЕ ОКНО ================= */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 33, 66, 0.65);
+      backdrop-filter: blur(3px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+      z-index: 100;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      color: var(--text-dark);
+      width: 100%;
+      max-width: 350px;
+      border-radius: 14px;
+      padding: 26px 22px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      transform: scale(0.94);
+      transition: transform 0.25s ease;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      color: var(--navy-brand);
+      margin-bottom: 10px;
+    }
+
+    .modal-text {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #555555;
+      margin-bottom: 20px;
+    }
+
+    .modal-action-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: var(--navy-brand);
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: #777777;
+      font-size: 13px;
+      cursor: pointer;
+      padding: 6px 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ВЕРХНЯЯ ЧАСТЬ -->
+  <section class="hero-section">
+    <div class="logo-wrapper">
+      <!-- Основной логотип -->
+      <img src="Untitled3_20261116115730.png" alt="Imdiva" class="logo-full">
+      
+      <!-- Вышивка "сшито с любовью" с иголкой -->
+      <div class="embroidery">
+        <svg viewBox="0 0 400 80">
+          <text x="50%" y="55" text-anchor="middle" class="stitch-text">сшито с любовью</text>
+        </svg>
+        <div class="needle">🪡</div>
+      </div>
+    </div>
+
+    <!-- Кнопки -->
+    <div class="buttons-container">
+      <button class="clean-btn" onclick="openOrderModal('Тапсырыс беру')">
+        Тапсырыс беру
+      </button>
+      <button class="clean-btn" onclick="openOrderModal('Оформить заказ')">
+        Оформить заказ
+      </button>
+    </div>
+  </section>
+
+  <!-- НИЖНИЙ БЛОК -->
+  <section class="brand-info-section">
+    <div class="divider-line"></div>
+    
+    <div class="bottom-logo-box">
+      <img src="Untitled3_20261116115730.png" alt="Imdiva" class="bottom-logo">
+    </div>
+
+    <p class="brand-description">
+      Каждое изделие создается с особым трепетом, сочетая национальные традиции и современную элегантность. Мы уделяем внимание каждому стежку, чтобы дарить вам комфорт и неповторимый стиль.
+    </p>
+
+    <div class="contacts-grid">
+      <div class="info-card"></div>
+      <div class="info-card"></div>
+    </div>
+  </section>
+
+  <!-- МОДАЛЬНОЕ ОКНО -->
+  <div class="modal-overlay" id="orderModal" onclick="closeModalOnBg(event)">
+    <div class="modal-box">
+      <h3 class="modal-title" id="modalTitle">Оформить заказ</h3>
+      <p class="modal-text">
+        Перейдите в наш WhatsApp или Instagram Direct, чтобы выбрать размер и оформить доставку.
+      </p>
+      <a href="https://wa.me/77000000000" target="_blank" class="modal-action-btn">
+        Написать в WhatsApp
+      </a>
+      <button class="modal-close" onclick="closeOrderModal()">Закрыть</button>
+    </div>
   </div>
-</section>
 
-<style>
-  .about-brand-section {
-    background-color: #0D1D3A; /* Тёмно-синий фон как на скрине */
-    color: #FFFFFF;
-    padding: 50px 24px;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-  }
+  <script>
+    const modal = document.getElementById('orderModal');
+    const modalTitle = document.getElementById('modalTitle');
 
-  .divider-line {
-    width: 40px;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.3);
-    margin: 0 auto 24px;
-  }
+    function openOrderModal(titleText) {
+      modalTitle.textContent = titleText;
+      modal.classList.add('active');
+    }
 
-  .brand-heading {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 32px;
-    font-weight: 500;
-    margin: 0 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
+    function closeOrderModal() {
+      modal.classList.remove('active');
+    }
 
-  /* Стили для картинки-логотипа в заголовке */
-  .inline-brand-logo {
-    height: 36px; /* Можешь подкрутить высоту под пропорции своего лого */
-    width: auto;
-    object-fit: contain;
-    vertical-align: middle;
-  }
+    function closeModalOnBg(event) {
+      if (event.target === modal) {
+        closeOrderModal();
+      }
+    }
+  </script>
 
-  .brand-description {
-    font-size: 14px;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.85);
-    max-width: 440px;
-    margin: 0 auto 36px;
-    font-weight: 300;
-  }
-
-  .social-wrapper {
-    display: flex;
-    justify-content: center;
-  }
-
-  .insta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 26px;
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: rgba(255, 255, 255, 0.05);
-    color: #FFFFFF;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    transition: all 0.25s ease;
-  }
-
-  .insta-btn:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-  }
-</style>
+</body>
+</html>
